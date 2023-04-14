@@ -1,0 +1,55 @@
+<h1>Edit</h1>
+{{#if done}}
+    <div class="alert alert-warning" role="alert">Car {{done}} has been updated</div>
+{{/if}}
+<form method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">czarne</th>
+                <th scope="col">uszkodzone</th>
+                <th scope="col">nowe</th>
+                <th scope="col">modyfikowane</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each list}}
+                <tr>
+                {{#if (selected _id ../editable)}}
+                    <form method="get">
+                        <th>
+                            {{_id}}
+                            <input type="hidden" name="_id" value="{{_id}}">
+                        </th>
+                        {{#each this}}
+                            {{#unless (selected @key "_id")}}
+                                <td>
+                                    <select name="{{@key}}">
+                                        <option value="TAK" {{optSelected "TAK" this}}>TAK</option>
+                                        <option value="NIE" {{optSelected "NIE" this}}>NIE</option>
+                                        <option value="BRAK" {{optSelected "BRAK" this}}>BRAK</option>
+                                    </select>
+                                </td>
+                            {{/unless}}
+                        {{/each}}
+                        <td>
+                            <button class="btn btn-warning" role="button" formaction="/edit" onclick="return confirm(`Are you sure you want to update {{_id}}?`)">Update</button>
+                            <button class="btn btn-dark" role="button" formaction="/cancel">Cancel</button>
+                        </td>
+                    </form>
+                {{else}}
+                    <th scope="row">{{_id}}</th>
+                    <td>{{czarne}}</td>
+                    <td>{{uszkodzone}}</td>
+                    <td>{{nowe}}</td>
+                    <td>{{modyfikowane}}</td>
+                    <td><button class="btn btn-primary" value="{{_id}}" name="_id" role="button" form="pressEdit">edit</button></td>  
+                {{/if}}
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+<form style="display: none;" action="/edit" id="pressEdit"></form>

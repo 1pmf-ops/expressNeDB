@@ -1,0 +1,30 @@
+<h1>List / Delete</h1>
+{{#if _id}}
+    <div class="alert alert-danger" role="alert">Car {{_id}} has been removed</div>
+{{/if}}
+<form method="get" action="/list">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">czarne</th>
+                <th scope="col">uszkodzone</th>
+                <th scope="col">nowe</th>
+                <th scope="col">modyfikowane</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each list}}
+                <tr>
+                    <th scope="row">{{_id}}</th>
+                    <td>{{czarne}}</td>
+                    <td>{{uszkodzone}}</td>
+                    <td>{{nowe}}</td>
+                    <td>{{modyfikowane}}</td>
+                    <td><button class="btn btn-danger" role="button" name="_id" value="{{_id}}" onclick="return confirm(`Are you sure you want to delete {{_id}}?`)">delete</button></td>  
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>

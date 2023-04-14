@@ -1,0 +1,16 @@
+<h1>Add Cars</h1>
+{{#if _id}}
+    <div class="alert alert-success" role="alert">Car {{_id}} has been added</div>
+{{/if}}
+<form action="/add" method="get">
+    <!--dodać flash-->
+    <input type="checkbox" name="czarne" id="chColor">
+    <label for="chColor">czarne</label><br>
+    <input type="checkbox" name="uszkodzone" id="chState">
+    <label for="chState">uszkodzone</label><br>
+    <input type="checkbox" name="nowe" id="chNew">
+    <label for="chNew">nowe</label><br>
+    <input type="checkbox" name="modyfikowane" id="chMod">
+    <label for="chMod">modyfikowane</label><br>
+    <button type="submit" class="btn btn-dark">Dodaj!</button>
+</form>
