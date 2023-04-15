@@ -4,7 +4,8 @@ const PORT = 3001;
 
 const path = require("path");
 const hbs = require('express-handlebars');
-const Datastore = require("nedb")
+const Datastore = require("nedb");
+const { log } = require("console");
 
 const coll1 = new Datastore({
     filename: 'kolekcja.db',
@@ -119,10 +120,10 @@ app.get("/list", (req, res) => {
 })
 
 app.get("/add", (req, res) => {
-    if(JSON.stringify(req.query) != "{}") {
+    if(req.query.submit) {
         const car = {}
         for(el in req.query){
-            car[el] = "TAK"
+            if(el != 'submit') car[el] = "TAK"
         }
         coll1.insert(car, (err, newDoc) => {
             res.render('add.hbs', newDoc)
